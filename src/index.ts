@@ -1,5 +1,5 @@
 import 'dotenv/config'
-import express from 'express'
+import express, { type Request, type Response } from 'express'
 import cors from 'cors'
 import morgan from 'morgan'
 import mongoose from 'mongoose'
@@ -41,7 +41,7 @@ mongoose
   .catch((e) => console.error('Mongo error', e))
 
 // --- Health check ---
-app.get('/api/health', (_req, res) =>
+app.get('/api/health', (_req:Request, res:Response) =>
   res.json({ ok: true, name: 'anywhere-todo', ts: new Date().toISOString() })
 )
 
@@ -69,7 +69,7 @@ function parseBool(v: unknown) {
 }
 
 // --- List (フィルタ & ソート) ---
-app.get('/api/tasks', async (req, res) => {
+app.get('/api/tasks', async (req:Request, res:Response) => {
   const { category = '', includeArchived = 'false', done, sort = 'createdAt', order = 'desc' } =
     req.query as Record<string, string>
 
