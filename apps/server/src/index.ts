@@ -12,6 +12,8 @@ const allowed = (process.env.CORS_ORIGIN ?? '')
   .map(s => s.trim())
   .filter(Boolean)
 
+
+  
 app.use(cors({
   origin(origin, cb) {
     if (!origin) return cb(null, true)               // curl 等も許可
@@ -22,6 +24,14 @@ app.use(cors({
 }))
 
 app.use(express.json())
+
+
+// 動作確認用 10-26
+app.use((req, _res, next) => {
+  console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`)
+  next()
+})
+
 
 // Health
 app.get('/api/health', (_req, res) => {
@@ -54,3 +64,4 @@ mongoose.connect(MONGO_URL).then(() => {
   console.error('❌ MongoDB connect error:', err)
   process.exit(1)
 })
+
