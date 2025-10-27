@@ -2,7 +2,7 @@ import 'dotenv/config'
 import express from 'express'
 import cors from 'cors'
 import mongoose from 'mongoose'
-import tasksRouter from './routes/tasks'
+import tasksRouter from './routes/tasks.js'
 
 const app = express()
 
@@ -11,8 +11,6 @@ const allowed = (process.env.CORS_ORIGIN ?? '')
   .split(',')
   .map(s => s.trim())
   .filter(Boolean)
-
-
   
 app.use(cors({
   origin(origin, cb) {
