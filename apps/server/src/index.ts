@@ -59,8 +59,15 @@ if (!MONGO_URL) {
 
 mongoose.connect(MONGO_URL).then(() => {
   console.log('✅ MongoDB connected')
-  app.listen(PORT, () => console.log(`🚀 API on http://localhost:${PORT}`))
-}).catch(err => {
+  app.listen(PORT, () => {
+    const env = process.env.NODE_ENV || 'development';
+    if (env === 'production' ){
+      console.log(`🚀 API running on Render (PORT=${PORT})`);
+    } else {
+      console.log(`🚀 API on http://localhost:${PORT}`)  
+    }
+  });
+  }).catch(err => {
   console.error('❌ MongoDB connect error:', err)
   process.exit(1)
 })

@@ -1,0 +1,15 @@
+# node_modules フォルダを除外
+node_modules/
+
+# ビルド後のファイル
+dist/
+build/
+
+# 環境変数ファイルを除外
+.env
+.env.local
+.env.development.local
+.env.production.local
+
+# VSCode設定など
+.vscode/
