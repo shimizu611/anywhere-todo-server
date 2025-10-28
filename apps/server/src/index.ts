@@ -36,8 +36,9 @@ app.get('/api/health', (_req, res) => {
   res.json({ ok: true, env: process.env.NODE_ENV, time: new Date().toISOString() })
 })
 
-// API
+// API api/todosに変更済10-28 2:00PM
 app.use('/api/todos', tasksRouter)
+
 
 // API以外は404をJSONで
 app.use('/api', (_req, res) => res.status(404).json({ error: 'Not Found' }))
